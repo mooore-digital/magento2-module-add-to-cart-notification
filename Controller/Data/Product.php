@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Marissen\AddToCartNotification\Controller\Data;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
-use Magento\Catalog\Block\Product\ImageFactory;
+use Magento\Catalog\Helper\ImageFactory;
+use Magento\Catalog\Model\Product as ProductModel;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
-use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -42,11 +41,11 @@ class Product extends Action
         UrlInterface $urlBuilder,
         Context $context
     ) {
-        parent::__construct($context);
         $this->productRepository = $productRepository;
         $this->jsonFactory = $jsonFactory;
         $this->imageFactory = $imageFactory;
         $this->urlBuilder = $urlBuilder;
+        parent::__construct($context);
     }
 
     /**
@@ -62,20 +61,24 @@ class Product extends Action
         $productId = (int) $this->_request->getParam('product_id');
 
         try {
-            /** @var \Magento\Catalog\Model\Product $product */
+            /** @var ProductModel $product */
             $product = $this->productRepository->getById($productId);
         } catch (NoSuchEntityException $e) {
             throw new NotFoundException(__('Product %1 does not exist.', $productId));
         }
 
-        /** @var \Magento\Catalog\Block\Product\Image $image */
-        $image = $this->imageFactory->create($product, 'product_small_image', []);
-
         return $this->jsonFactory->create()->setData([
             'id' => $product->getId(),
             'name' => $product->getName(),
-            'image' => $image->getImageUrl(),
+            'image' => $this->getImageUrl($product),
             'cart_url' => $this->urlBuilder->getUrl('checkout/cart')
         ]);
+    }
+
+    private function getImageUrl(ProductModel $product): string
+    {
+        return $this->imageFactory->create()
+            ->init($product, 'product_small_image', [])
+            ->getUrl();
     }
 }
