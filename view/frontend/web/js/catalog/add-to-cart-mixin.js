@@ -21,14 +21,18 @@ define([
                 this.cartPromise()
             ).then(function (data) {
                 var product = data[0];
-                var message = $.mage.__('Successfully added %1 to your <a href="%2">shopping cart!</a>')
+                var title = $.mage.__('Added To Bag');
+                var message = $.mage.__('You added %1 to your <a href="%2">shopping cart</a>')
                     .replace('%1', product['name'])
                     .replace('%2', product['cart_url']);
 
                 $('body').append(
-                    '<div id="add_to_cart_notification">' +
-                    '<img src="' + product['image'] + '" alt="' + product['name'] + '" title="' + product['name'] + '">' +
-                    '<p>' + message + '</p>' +
+                    '<div id="add_to_cart_notification" class="add-to-cart">' +
+                    '<img class="notification-image" src="' + product['image'] + '" alt="' + product['name'] + '" title="' + product['name'] + '">' +
+                    '<div class="notification-content">' +
+                    '<p class="notification-title">' + title + '</p>' +
+                    '<p class="notification-message">' + message + '</p>' +
+                    '</div>' +
                     '</div>'
                 );
 
