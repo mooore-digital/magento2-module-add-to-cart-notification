@@ -7,6 +7,8 @@ define([
 
     var NOTIFICATION_LIFETIME = 1500;
 
+    var config = window['checkout']['add_to_cart_notification'];
+
     var mixin = {
         /**
          * @param {jQuery} form
@@ -22,7 +24,7 @@ define([
             ).then(function (data) {
                 var product = data[0];
                 var title = $.mage.__('Added To Bag');
-                var message = $.mage.__('You added %1 to your <a href="%2">shopping cart</a>')
+                var message = $.mage.__('You added %1 to your <a href="%2">shopping cart</a>.')
                     .replace('%1', product['name'])
                     .replace('%2', product['cart_url']);
 
@@ -37,8 +39,8 @@ define([
                 );
 
                 setTimeout(function () {
-                    // $('#add_to_cart_notification').remove();
-                }, NOTIFICATION_LIFETIME);
+                    $('#add_to_cart_notification').remove();
+                }, config['notificationLifetime']);
             });
         },
 
@@ -67,6 +69,10 @@ define([
     };
 
     return function (target) {
+        if (!config['enabled']) {
+            return target;
+        }
+
         $.widget('marissen.catalogAddToCart', target, mixin);
 
         return $.marissen.catalogAddToCart;

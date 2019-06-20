@@ -1,0 +1,49 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="checkout">
+            <group id="add_to_cart_notification"
+                   sortOrder="100"
+                   translate="label"
+                   showInDefault="1"
+                   showInWebsite="1"
+                   showInStore="1">
+                <label>Add To Cart Notification</label>
+                <field id="enabled"
+                       type="select"
+                       translate="label"
+                       sortOrder="10"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1"
+                       canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="disable_default_notification"
+                       type="select"
+                       translate="label"
+                       sortOrder="20"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1"
+                       canRestore="1">
+                    <label>Disable Default Add To Cart Notification</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="notification_lifetime"
+                       type="text"
+                       translate="label"
+                       sortOrder="30"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1"
+                       canRestore="1">
+                    <label>Lifetime of notification</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <comment>Lifetime in milliseconds</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
