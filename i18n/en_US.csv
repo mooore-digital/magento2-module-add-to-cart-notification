@@ -1,2 +1,7 @@
 "Product %1 does not exist.","Product %1 does not exist."
-"Successfully added %1 to your <a href=""%2"">shopping cart!</a>","Successfully added %1 to your <a href=""%2"">shopping cart!</a>"
+"Added To Bag","Added To Bag"
+"You added %1 to your <a href=""%2"">shopping cart</a>.","You added %1 to your <a href=""%2"">shopping cart</a>."
+"Add To Cart Notification","Add To Cart Notification"
+Enabled,Enabled
+"Disable Default Add To Cart Notification","Disable Default Add To Cart Notification"
+"Lifetime of notification","Lifetime of notification"
