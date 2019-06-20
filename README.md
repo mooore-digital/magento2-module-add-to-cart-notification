@@ -9,3 +9,4 @@ bin/magento setup:upgrade
 
 ## Configuration
 Go to `System -> Configuration -> Sales -> Checkout -> Add To Cart Notification` to configure the module.
+![Image of the configuration](docs/configuration.png)
