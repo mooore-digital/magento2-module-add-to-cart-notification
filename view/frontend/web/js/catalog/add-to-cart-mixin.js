@@ -30,6 +30,7 @@ define([
 
                 $('body').append(
                     '<div id="add_to_cart_notification" class="add-to-cart">' +
+                    '<div class="btn-close"></div>' +
                     '<img class="notification-image" src="' + product['image'] + '" alt="' + product['name'] + '" title="' + product['name'] + '">' +
                     '<div class="notification-content">' +
                     '<p class="notification-title">' + title + '</p>' +
@@ -38,8 +39,12 @@ define([
                     '</div>'
                 );
 
+                $('#add_to_cart_notification').click(function () {
+                    $(this).remove();
+                })
+
                 setTimeout(function () {
-                    $('#add_to_cart_notification').remove();
+                    // $('#add_to_cart_notification').remove();
                 }, config['notificationLifetime']);
             });
         },
