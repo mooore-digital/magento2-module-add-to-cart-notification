@@ -41,7 +41,7 @@ define([
 
                 $('#add_to_cart_notification').click(function () {
                     $(this).remove();
-                })
+                });
 
                 setTimeout(function () {
                     // $('#add_to_cart_notification').remove();
