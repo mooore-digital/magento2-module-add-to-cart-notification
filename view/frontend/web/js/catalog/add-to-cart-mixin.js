@@ -15,6 +15,7 @@ define([
          */
         ajaxSubmit: function (form) {
             var productId = form.find('input[name="product"]').val();
+            var self = this;
 
             this._super(form);
 
@@ -30,6 +31,7 @@ define([
 
                 $('body').append(
                     '<div id="add_to_cart_notification" class="add-to-cart">' +
+                    '<div class="btn-close"></div>' +
                     '<img class="notification-image" src="' + product['image'] + '" alt="' + product['name'] + '" title="' + product['name'] + '">' +
                     '<div class="notification-content">' +
                     '<p class="notification-title">' + title + '</p>' +
@@ -38,9 +40,19 @@ define([
                     '</div>'
                 );
 
+                $("#add_to_cart_notification").find(".btn-close").click(function () {
+                    self.removeNotification();
+                });
+
                 setTimeout(function () {
-                    $('#add_to_cart_notification').remove();
+                    self.removeNotification();
                 }, config['notificationLifetime']);
+            });
+        },
+
+        removeNotification: function () {
+            $("#add_to_cart_notification").fadeOut(150, function () {
+                $(this).remove();
             });
         },
 
