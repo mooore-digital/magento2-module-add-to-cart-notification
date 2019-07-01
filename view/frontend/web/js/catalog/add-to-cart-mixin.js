@@ -15,6 +15,7 @@ define([
          */
         ajaxSubmit: function (form) {
             var productId = form.find('input[name="product"]').val();
+            var self = this;
 
             this._super(form);
 
@@ -39,13 +40,19 @@ define([
                     '</div>'
                 );
 
-                $('#add_to_cart_notification').click(function () {
-                    $(this).remove();
+                $("#add_to_cart_notification").find(".btn-close").click(function () {
+                    self.removeNotification();
                 });
 
                 setTimeout(function () {
-                    // $('#add_to_cart_notification').remove();
+                    self.removeNotification();
                 }, config['notificationLifetime']);
+            });
+        },
+
+        removeNotification: function () {
+            $("#add_to_cart_notification").fadeOut(150, function () {
+                $(this).remove();
             });
         },
 
