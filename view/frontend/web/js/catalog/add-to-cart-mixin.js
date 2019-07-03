@@ -47,7 +47,29 @@ define([
                 setTimeout(function () {
                     self.removeNotification();
                 }, config['notificationLifetime']);
-            });
+            }, function (data)
+                alert('failure');
+                var title = $.mage.__('We \'re sorry, that didn\'t work.');
+                var message = $.mage.__('No products could be added to your shopping cart. :(')
+
+                $('body').append(
+                    '<div id="add_to_cart_notification" class="add-to-cart">' +
+                    '<div class="btn-close"></div>' +
+                    '<img class="notification-image" src="' + product['image'] + '" alt="' + product['name'] + '" title="' + product['name'] + '">' +
+                    '<div class="notification-content">' +
+                    '<p class="notification-title">' + title + '</p>' +
+                    '<p class="notification-message">' + message + '</p>' +
+                    '</div>' +
+                    '</div>'
+                );
+
+                $("#add_to_cart_notification").find(".btn-close").click(function () {
+                    self.removeNotification();
+                });
+
+                setTimeout(function () {
+                    self.removeNotification();
+                }, config['notificationLifetime']););
         },
 
         removeNotification: function () {
@@ -75,6 +97,17 @@ define([
 
                 $(document).off('ajaxSuccess');
             });
+
+            $(document).on('ajaxFailure', function(event, request, settings) {
+                if (!settings.url.indexOf('/checkout/cart/add')) {
+                    return;
+                }
+
+                dfd.reject();
+
+                $(document).off('ajaxFailure');
+            });
+        });
 
             return dfd.promise();
         }
