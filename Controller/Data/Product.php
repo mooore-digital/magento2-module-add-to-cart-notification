@@ -67,8 +67,6 @@ class Product extends Action
             throw new NotFoundException(__('Product %1 does not exist.', $productId));
         }
 
-
-
         return $this->jsonFactory->create()->setData([
             'id' => $product->getId(),
             'name' => $product->getName(),
