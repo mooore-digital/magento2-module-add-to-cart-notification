@@ -5,8 +5,6 @@ define([
 ], function ($) {
     'use strict';
 
-    var NOTIFICATION_LIFETIME = 1500;
-
     var config = window['checkout']['add_to_cart_notification'];
 
     var mixin = {
@@ -18,6 +16,8 @@ define([
             var self = this;
 
             this._super(form);
+
+            self.element.find('.message.error').remove();
 
             $.when(
                 this.productPromise(productId),
@@ -47,28 +47,11 @@ define([
                 setTimeout(function () {
                     self.removeNotification();
                 }, config['notificationLifetime']);
-            }, function (data) {
-                var title = $.mage.__('We \'re sorry, that didn\'t work.');
-                var message = $.mage.__('No products could be added to your shopping cart. :(')
-
-                $('body').append(
-                    '<div id="add_to_cart_notification" class="add-to-cart">' +
-                    '<div class="btn-close"></div>' +
-                    '<img class="notification-image" src="' + product['image'] + '" alt="' + product['name'] + '" title="' + product['name'] + '">' +
-                    '<div class="notification-content">' +
-                    '<p class="notification-title">' + title + '</p>' +
-                    '<p class="notification-message">' + message + '</p>' +
-                    '</div>' +
-                    '</div>'
-                );
-
-                $("#add_to_cart_notification").find(".btn-close").click(function () {
-                    self.removeNotification();
+            }, function (messages) {
+                var button = self.element.find('button.tocart');
+                messages.forEach(function (message) {
+                    button.before('<p class="message error add-to-cart-error">' + message.text + '</p>');
                 });
-
-                setTimeout(function () {
-                    self.removeNotification();
-                }, config['notificationLifetime']);
             });
         },
 
@@ -89,23 +72,18 @@ define([
             var dfd = $.Deferred();
 
             $(document).on('ajaxSuccess', function (event, request, settings) {
-                if (!settings.url.indexOf('/checkout/cart/add')) {
+                if (settings.url.indexOf('/checkout/cart/add') === -1) {
+                    return;
+                }
+
+                if (request.responseJSON.error_messages) {
+                    dfd.reject(request.responseJSON.error_messages);
+                    $(document).off('ajaxSuccess');
                     return;
                 }
 
                 dfd.resolve();
-
                 $(document).off('ajaxSuccess');
-            });
-
-            $(document).on('ajaxFailure', function (event, request, settings) {
-                if (!settings.url.indexOf('/checkout/cart/add')) {
-                    return;
-                }
-
-                dfd.reject();
-
-                $(document).off('ajaxFailure');
             });
 
             return dfd.promise();
