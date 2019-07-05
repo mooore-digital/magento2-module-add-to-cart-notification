@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Framework\Message\ManagerInterface">
         <plugin sortOrder="1" name="marissenAddToCartNotificationManagerInterface"
-                type="Marissen\AddToCartNotification\Plugin\Message\ManagerInterfacePlugin" disabled="false"/>
+                type="Marissen\AddToCartNotification\Plugin\Message\ManagerInterfacePlugin"/>
     </type>
     <type name="Magento\Checkout\Block\Cart\Sidebar">
         <plugin sortOrder="1" name="marissenAddToCartNotificationSidebar"
