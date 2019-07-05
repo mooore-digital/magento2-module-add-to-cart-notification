@@ -47,8 +47,7 @@ define([
                 setTimeout(function () {
                     self.removeNotification();
                 }, config['notificationLifetime']);
-            }, function (data)
-                alert('failure');
+            }, function (data) {
                 var title = $.mage.__('We \'re sorry, that didn\'t work.');
                 var message = $.mage.__('No products could be added to your shopping cart. :(')
 
@@ -69,7 +68,8 @@ define([
 
                 setTimeout(function () {
                     self.removeNotification();
-                }, config['notificationLifetime']););
+                }, config['notificationLifetime']);
+            });
         },
 
         removeNotification: function () {
@@ -98,7 +98,7 @@ define([
                 $(document).off('ajaxSuccess');
             });
 
-            $(document).on('ajaxFailure', function(event, request, settings) {
+            $(document).on('ajaxFailure', function (event, request, settings) {
                 if (!settings.url.indexOf('/checkout/cart/add')) {
                     return;
                 }
@@ -107,7 +107,6 @@ define([
 
                 $(document).off('ajaxFailure');
             });
-        });
 
             return dfd.promise();
         }
