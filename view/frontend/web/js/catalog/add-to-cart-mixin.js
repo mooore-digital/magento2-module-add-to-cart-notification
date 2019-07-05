@@ -49,9 +49,12 @@ define([
                 }, config['notificationLifetime']);
             }, function (messages) {
                 var button = self.element.find('button.tocart');
-                messages.forEach(function (message) {
-                    button.before('<p class="message error add-to-cart-error">' + message.text + '</p>');
-                });
+                var mageErrors = self.element.find('div.mage-error');
+                if (mageErrors.length === 0) {
+                    messages.forEach(function (message) {
+                        button.before('<p class="message error add-to-cart-error">' + message.text + '</p>');
+                    });
+                }
             });
         },
 
