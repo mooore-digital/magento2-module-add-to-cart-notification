@@ -49,7 +49,7 @@ define([
                 }, config['notificationLifetime']);
             }, function (messages) {
                 if (self.element.find('div.mage-error').filter(':visible').length > 0) {
-                    return
+                    return;
                 }
                 
                 var button = self.element.find('button.tocart');
