@@ -48,6 +48,10 @@ define([
                     self.removeNotification();
                 }, config['notificationLifetime']);
             }, function (messages) {
+                if (self.element.find('div.mage-error').filter(':visible').length > 0) {
+                    return;
+                }
+                
                 var button = self.element.find('button.tocart');
                 messages.forEach(function (message) {
                     button.before('<p class="message error add-to-cart-error">' + message.text + '</p>');
