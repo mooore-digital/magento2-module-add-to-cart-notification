@@ -1,5 +1,5 @@
 {
-    "name": "marissen/magento2-module-add-to-cart-notification",
+    "name": "mooore/magento2-module-add-to-cart-notification",
     "description": "",
     "license": "MIT",
     "require": {
@@ -7,13 +7,12 @@
         "magento/module-checkout": "*"
     },
     "type": "magento2-module",
-    "version": "1.0.0",
     "autoload": {
         "files": [
             "registration.php"
         ],
         "psr-4": {
-            "Marissen\\AddToCartNotification\\": ""
+            "Mooore\\AddToCartNotification\\": ""
         }
     }
 }

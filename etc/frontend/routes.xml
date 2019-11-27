@@ -2,7 +2,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
         <route id="cart_notification" frontName="cart_notification">
-            <module name="Marissen_AddToCartNotification"/>
+            <module name="Mooore_AddToCartNotification"/>
         </route>
     </router>
 </config>

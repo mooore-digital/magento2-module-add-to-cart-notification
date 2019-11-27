@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Marissen\AddToCartNotification\Controller\Data;
+namespace Mooore\AddToCartNotification\Controller\Data;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Helper\ImageFactory;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Marissen\AddToCartNotification\Model\Checkout;
+namespace Mooore\AddToCartNotification\Model\Checkout;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
-use Marissen\AddToCartNotification\Model\Config;
+use Mooore\AddToCartNotification\Model\Config;
 
 class ConfigProvider implements ConfigProviderInterface
 {

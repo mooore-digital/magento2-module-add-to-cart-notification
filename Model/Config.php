@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Marissen\AddToCartNotification\Model;
+namespace Mooore\AddToCartNotification\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;

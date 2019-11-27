@@ -99,8 +99,8 @@ define([
             return target;
         }
 
-        $.widget('marissen.catalogAddToCart', target, mixin);
+        $.widget('mooore.catalogAddToCart', target, mixin);
 
-        return $.marissen.catalogAddToCart;
+        return $.mooore.catalogAddToCart;
     }
 });

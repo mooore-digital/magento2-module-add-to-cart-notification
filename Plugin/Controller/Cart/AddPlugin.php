@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Marissen\AddToCartNotification\Plugin\Controller\Cart;
+namespace Mooore\AddToCartNotification\Plugin\Controller\Cart;
 
 use Magento\Checkout\Controller\Cart\Add as Subject;
 use Magento\Framework\App\Request\Http as HttpRequest;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Marissen\AddToCartNotification\Plugin\Block\Cart;
+namespace Mooore\AddToCartNotification\Plugin\Block\Cart;
 
-use Marissen\AddToCartNotification\Model\Checkout\ConfigProvider;
+use Mooore\AddToCartNotification\Model\Checkout\ConfigProvider;
 
 class SidebarPlugin
 {

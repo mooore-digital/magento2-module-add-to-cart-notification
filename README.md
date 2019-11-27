@@ -3,7 +3,7 @@ Show a pretty notification after add to cart.
 
 ## Installation
 ``` bash
-composer require marissen/magento2-module-add-to-cart-notification
+composer require mooore/magento2-module-add-to-cart-notification
 bin/magento setup:upgrade
 ```
 

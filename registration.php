@@ -2,6 +2,6 @@
 
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,
-    'Marissen_AddToCartNotification',
+    'Mooore_AddToCartNotification',
     __DIR__
 );

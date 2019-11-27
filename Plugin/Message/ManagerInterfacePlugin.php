@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Marissen\AddToCartNotification\Plugin\Message;
+namespace Mooore\AddToCartNotification\Plugin\Message;
 
-use Marissen\AddToCartNotification\Model\Config;
+use Mooore\AddToCartNotification\Model\Config;
 
 class ManagerInterfacePlugin
 {
