@@ -36,7 +36,9 @@ class ManagerInterfacePlugin
         array $data = [],
         $group = null
     ) {
-        if ($identifier === 'addCartSuccessMessage' && $this->config->isEnabled() && $this->config->isDefaultNotificationDisabled()) {
+        if ($identifier === 'addCartSuccessMessage' && 
+            $this->config->isEnabled() && 
+            $this->config->isDefaultNotificationDisabled()) {
             return $subject;
         }
 
