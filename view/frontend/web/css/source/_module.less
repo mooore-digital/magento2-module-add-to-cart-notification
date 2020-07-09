@@ -1,32 +1,50 @@
+@modal-added-to-cart-offset: 20px;
+@modal-added-to-cart-max-width: 480px;
+@modal-added-to-cart-padding: (@modal-popup__padding / 2);
+@modal-added-to-cart-bg: @modal__background-color;
+@modal-added-to-cart-color: inherit;
+@modal-added-to-cart-box-shadow: @modal__box-shadow;
+
 & when (@media-common = true) {
-    .add-to-cart {
+    .modal-added-to-cart {
         z-index: 9;
         position: fixed;
         top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #fff;
+        right: 0;
+        bottom: auto;
+        left: 0;
+        max-width: @modal-added-to-cart-max-width;
+        margin: 0 auto;
+        padding: @modal-added-to-cart-padding;
+        background-color: @modal-added-to-cart-bg;
+        color: @modal-added-to-cart-color;
+        box-shadow: @modal-added-to-cart-box-shadow;
 
-        @media only screen and (min-width: 480px) {
-            top: 20px;
+        .modal-content {
+            display: flex;
+            align-items: flex-start;
+            margin-right: @modal-action-close__font-size;
         }
 
-        .btn-close {
-            @size: 10px;
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 15px;
-            height: @size;
-            width: @size;
-            border-radius: 50%;
-            background: url("../images/icons/close.svg") center/10px no-repeat;
-            transition: background-color 0.2s;
-            cursor: pointer;
+        .product-image {
+            flex: 0 0 auto;
+            width: 50px;
+            margin-right: 1em;
+        }
+    }
 
-            &:hover {
-                background-color: #f2f2f2;
-            }
+    .message.message-add-to-cart {
+        padding: @message__padding;
+
+        > :first-child::before {
+            content: none;
         }
     }
 }
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .modal-added-to-cart {
+        top: @modal-added-to-cart-offset;
+    }
+}
+
