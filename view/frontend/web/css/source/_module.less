@@ -1,30 +1,32 @@
-.add-to-cart {
-  z-index: 9;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #fff;
+& when (@media-common = true) {
+    .add-to-cart {
+        z-index: 9;
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #fff;
 
-  @media only screen and (min-width: 480px) {
-    top: 20px;
-  }
+        @media only screen and (min-width: 480px) {
+            top: 20px;
+        }
 
-  .btn-close {
-    @size: 10px;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    padding: 15px;
-    height: @size;
-    width: @size;
-    border-radius: 50%;
-    background: url("../images/icons/close.svg") center/10px no-repeat;
-    transition: background-color .2s;
-    cursor: pointer;
+        .btn-close {
+            @size: 10px;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 15px;
+            height: @size;
+            width: @size;
+            border-radius: 50%;
+            background: url("../images/icons/close.svg") center/10px no-repeat;
+            transition: background-color 0.2s;
+            cursor: pointer;
 
-    &:hover {
-      background-color: #f2f2f2;
+            &:hover {
+                background-color: #f2f2f2;
+            }
+        }
     }
-  }
 }
