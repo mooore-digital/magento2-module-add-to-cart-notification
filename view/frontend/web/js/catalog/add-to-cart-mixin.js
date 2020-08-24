@@ -52,6 +52,10 @@ define(["jquery", "mage/translate", "jquery/ui"], function ($) {
                         "</div></div></div>"
                     );
 
+                    // Clear all add-to-cart messages,
+                    // except our own notification.
+                    $(".message.info.message-add-to-cart").remove();
+
                     $("#add_to_cart_notification")
                         .find(".action-close")
                         .click(function () {
