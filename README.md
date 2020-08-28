@@ -13,4 +13,6 @@ bin/magento setup:upgrade
 
 Go to `System -> Configuration -> Sales -> Checkout -> Add To Cart Notification` to configure the module.
 
+Also make sure that `Sales -> Checkout -> Shopping Cart -> After Adding a Product Redirect to Shopping Cart` is set to **No**.
+
 ![Image of the configuration](docs/configuration.png)
