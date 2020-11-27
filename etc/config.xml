@@ -6,7 +6,7 @@
             <add_to_cart_notification>
                 <enabled>1</enabled>
                 <disable_default_notification>1</disable_default_notification>
-                <notification_lifetime>2000</notification_lifetime>
+                <notification_lifetime>4000</notification_lifetime>
             </add_to_cart_notification>
         </checkout>
     </default>
