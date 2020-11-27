@@ -1,7 +1,9 @@
 define(["jquery", "mage/translate", "jquery/ui"], function ($) {
     "use strict";
 
-    var config = window["checkout"]["add_to_cart_notification"];
+    if (typeof window["checkout"] !== 'undefined') {
+        var config = window["checkout"]["add_to_cart_notification"];
+    }
 
     var mixin = {
         /**
@@ -20,8 +22,8 @@ define(["jquery", "mage/translate", "jquery/ui"], function ($) {
                     var product = data[0];
                     var title = $.mage.__("Added To Bag");
                     var message = $.mage.__('You added %1 to your <a href="%2">shopping cart</a>.')
-                            .replace("%1", product["name"])
-                            .replace("%2", product["cart_url"]);
+                        .replace("%1", product["name"])
+                        .replace("%2", product["cart_url"]);
 
                     var modalCloseBtn =
                         '<button class="action-close"><span>' + $.mage.__("Close") + "</span></button>";
@@ -119,8 +121,10 @@ define(["jquery", "mage/translate", "jquery/ui"], function ($) {
     };
 
     return function (target) {
-        if (!config["enabled"]) {
-            return target;
+        if (typeof config !== 'undefined') {
+            if (!config['enabled']) {
+                return target;
+            }
         }
 
         $.widget("mooore.catalogAddToCart", target, mixin);
