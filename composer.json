@@ -1,12 +1,25 @@
 {
     "name": "mooore/magento2-module-add-to-cart-notification",
-    "description": "",
     "license": "MIT",
+    "type": "magento2-module",
+    "description": "",
+    "readme": "README.md",
+    "keywords": [
+        "magento2",
+        "add-to-cart",
+        "message"
+    ],
+    "authors": [
+        {
+            "name": "Mooore Digital",
+            "email": "info@mooore.nl",
+            "homepage": "https://www.mooore.nl"
+        }
+    ],
     "require": {
         "magento/module-catalog": "*",
         "magento/module-checkout": "*"
     },
-    "type": "magento2-module",
     "autoload": {
         "files": [
             "registration.php"
