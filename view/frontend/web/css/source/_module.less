@@ -1,4 +1,7 @@
-@modal-add-to-cart-mobile-position: "bottom"; // Any other option will work as top
+@modal-add-to-cart-mobile-position: "bottom";
+@modal-add-to-cart-desktop-position: "top";
+
+@modal-add-to-cart-index: @modal__z-index;
 @modal-add-to-cart-offset: 1em;
 @modal-add-to-cart-max-width: 480px;
 @modal-add-to-cart-padding: (@modal-popup__padding / 2);
@@ -6,14 +9,32 @@
 @modal-add-to-cart-color: inherit;
 @modal-add-to-cart-box-shadow: @modal__box-shadow;
 
-& when (@media-common = true) {
-    .modal-added-to-cart {
-        box-sizing: border-box;
-        z-index: 9;
-        position: fixed;
+.modal-added-to-cart-position(@position) {
+    & when (@position = "top") {
         top: @modal-add-to-cart-offset;
-        right: 0;
         bottom: auto;
+    }
+
+    & when (@position = "bottom") {
+        top: auto;
+        bottom: @modal-add-to-cart-offset;
+    }
+}
+
+& when (@media-common = true) {
+    @keyframes modal-added-to-cart-show {
+        from {
+            opacity: 0;
+            transition: translateY(var(--modal-offset-from, -100%));
+        }
+    }
+
+    .modal-added-to-cart {
+        .modal-added-to-cart-position(@modal-add-to-cart-mobile-position);
+        box-sizing: border-box;
+        z-index: @modal-add-to-cart-index;
+        position: fixed;
+        right: 0;
         left: 0;
         max-width: @modal-add-to-cart-max-width;
         width: calc(~"100% -" (@modal-add-to-cart-offset * 2));
@@ -22,6 +43,7 @@
         background-color: @modal-add-to-cart-bg;
         color: @modal-add-to-cart-color;
         box-shadow: @modal-add-to-cart-box-shadow;
+        animation: modal-added-to-cart-show 500ms;
 
         .modal-content {
             display: flex;
@@ -33,6 +55,12 @@
             flex: 0 0 auto;
             width: 50px;
             margin-right: 1em;
+
+        .nav-open &,
+        .filter-active & {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 200ms, visibility 0s 200ms;
         }
     }
 
@@ -46,11 +74,8 @@
 }
 
 /* prettier-ignore */
-& when (@modal-add-to-cart-mobile-position = "bottom") {
-    .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-        .modal-add-to-cart {
-            top: auto;
-            bottom: @modal-add-to-cart-offset;
-        }
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .modal-added-to-cart {
+        .modal-added-to-cart-position(@modal-add-to-cart-desktop-position);
     }
 }
