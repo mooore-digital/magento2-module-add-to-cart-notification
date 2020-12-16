@@ -1,8 +1,9 @@
 @modal-add-to-cart-mobile-position: "bottom";
+@modal-add-to-cart-mobile-offset: 1em;
 @modal-add-to-cart-desktop-position: "top";
+@modal-add-to-cart-desktop-offset: 1.5em;
 
 @modal-add-to-cart-index: @modal__z-index;
-@modal-add-to-cart-offset: 1em;
 @modal-add-to-cart-max-width: 480px;
 @modal-add-to-cart-padding: 1rem;
 @modal-add-to-cart-radius: 0.2rem;
@@ -10,15 +11,15 @@
 @modal-add-to-cart-color: inherit;
 @modal-add-to-cart-box-shadow: @modal__box-shadow;
 
-.modal-added-to-cart-position(@position) {
+.modal-added-to-cart-position(@position, @offset) {
     & when (@position = "top") {
-        top: @modal-add-to-cart-offset;
+        top: @offset;
         bottom: auto;
     }
 
     & when (@position = "bottom") {
         top: auto;
-        bottom: @modal-add-to-cart-offset;
+        bottom: @offset;
     }
 }
 
@@ -31,14 +32,17 @@
     }
 
     .modal-added-to-cart {
-        .modal-added-to-cart-position(@modal-add-to-cart-mobile-position);
+        .modal-added-to-cart-position(
+            @position: @modal-add-to-cart-mobile-position,
+            @offset: @modal-add-to-cart-mobile-offset
+        );
         box-sizing: border-box;
         z-index: @modal-add-to-cart-index;
         position: fixed;
         right: 0;
         left: 0;
         max-width: @modal-add-to-cart-max-width;
-        width: calc(~"100% -" (@modal-add-to-cart-offset * 2));
+        width: calc(~"100% -" (@modal-add-to-cart-mobile-offset * 2));
         margin: 0 auto;
         padding: @modal-add-to-cart-padding;
         border-radius: @modal-add-to-cart-radius;
@@ -83,6 +87,10 @@
 /* prettier-ignore */
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .modal-added-to-cart {
-        .modal-added-to-cart-position(@modal-add-to-cart-desktop-position);
+        .modal-added-to-cart-position(
+            @position: @modal-add-to-cart-desktop-position,
+            @offset: @modal-add-to-cart-desktop-offset
+        );
+        width: calc(~"100% -" (@modal-add-to-cart-desktop-offset * 2));
     }
 }
