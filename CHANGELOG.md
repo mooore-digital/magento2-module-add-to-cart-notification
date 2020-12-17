@@ -5,7 +5,7 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ## [Unreleased]
 ### Added
-* Postition option to the styles for mobile and desktop, Closes #16
+* Position option to the styles for mobile and desktop, Closes #16
 * Radius option to the styles
 
 ### Improved
