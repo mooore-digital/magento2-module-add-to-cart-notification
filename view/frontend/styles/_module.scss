@@ -1,23 +1,54 @@
-$modal-added-to-cart-offset: 20px;
-$modal-added-to-cart-max-width: 480px;
-$modal-added-to-cart-padding: ($modal-popup__padding / 2);
-$modal-added-to-cart-bg: $modal__background-color;
-$modal-added-to-cart-color: inherit;
-$modal-added-to-cart-box-shadow: $modal__box-shadow;
+$modal-add-to-cart-mobile-position: "bottom" !default;
+$modal-add-to-cart-mobile-offset: 1em !default;
+$modal-add-to-cart-desktop-position: "top" !default;
+$modal-add-to-cart-desktop-offset: 1.5em !default;
+
+$modal-add-to-cart-index: $modal__z-index !default;
+$modal-add-to-cart-max-width: 480px !default;
+$modal-add-to-cart-padding: 1rem !default;
+$modal-add-to-cart-radius: 0.2rem !default;
+$modal-add-to-cart-bg: $modal__background-color !default;
+$modal-add-to-cart-color: inherit !default;
+$modal-add-to-cart-box-shadow: $modal__box-shadow !default;
+
+@mixin modal-added-to-cart-position($position, $offset) {
+    @if ($position == "top") {
+        top: $offset;
+        bottom: auto;
+    }
+
+    @if ($position == "bottom") {
+        top: auto;
+        bottom: $offset;
+    }
+}
+
+@keyframes modal-added-to-cart-show {
+    from {
+        opacity: 0;
+        transition: translateY(var(--modal-offset-from, -100%));
+    }
+}
 
 .modal-added-to-cart {
-    z-index: 9;
+    @include modal-added-to-cart-position(
+        $position: $modal-add-to-cart-mobile-position,
+        $offset: $modal-add-to-cart-mobile-offset
+    );
+    box-sizing: border-box;
+    z-index: $modal-add-to-cart-index;
     position: fixed;
-    top: 0;
     right: 0;
-    bottom: auto;
     left: 0;
-    max-width: $modal-added-to-cart-max-width;
+    max-width: $modal-add-to-cart-max-width;
+    width: calc(100% - #{($modal-add-to-cart-mobile-offset * 2)});
     margin: 0 auto;
-    padding: $modal-added-to-cart-padding;
-    background-color: $modal-added-to-cart-bg;
-    color: $modal-added-to-cart-color;
-    box-shadow: $modal-added-to-cart-box-shadow;
+    padding: $modal-add-to-cart-padding;
+    border-radius: $modal-add-to-cart-radius;
+    background-color: $modal-add-to-cart-bg;
+    color: $modal-add-to-cart-color;
+    box-shadow: $modal-add-to-cart-box-shadow;
+    animation: modal-added-to-cart-show 500ms;
 
     .modal-content {
         display: flex;
@@ -29,6 +60,17 @@ $modal-added-to-cart-box-shadow: $modal__box-shadow;
         flex: 0 0 auto;
         width: 50px;
         margin-right: 1em;
+
+        > img {
+            vertical-align: middle;
+        }
+    }
+
+    .nav-open &,
+    .filter-active & {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 200ms, visibility 0s 200ms;
     }
 }
 
@@ -42,7 +84,10 @@ $modal-added-to-cart-box-shadow: $modal__box-shadow;
 
 @include min-screen($screen__m) {
     .modal-added-to-cart {
-        top: $modal-added-to-cart-offset;
+        @include modal-added-to-cart-position(
+            $position: $modal-add-to-cart-desktop-position,
+            $offset: $modal-add-to-cart-desktop-offset
+        );
+        width: calc(100% - #{($modal-add-to-cart-desktop-offset * 2)});
     }
 }
-
