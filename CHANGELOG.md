@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
 
 ## [Unreleased]
+
+## [1.4.0] - 2020-12-18
 ### Added
 * Position option to the styles for mobile and desktop, Closes #16
 * Radius option to the styles
