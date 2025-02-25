@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/**
+ * @var Escaper $escaper
+ * @var Template $block
+ */
+?>
+<script>
+    const initMoooreAddToCartNotification = () => ({
+        showNotification: false,
+    });
+</script>
+<div
+    x-data="initMoooreAddToCartNotification()"
+    class="fixed top-14 left-1/2 transform -translate-x-1/2 z-50"
+    x-show="showNotification"
+    @click.window="showNotification = !showNotification"
+    x-cloak
+>
+    <div class="bg-white shadow-md rounded-lg p-4 border border-gray-200">
+        <p>Test</p>
+    </div>
+</div>

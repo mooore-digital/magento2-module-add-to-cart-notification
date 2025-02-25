@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="before.body.end">
+            <block
+                name="mooore.add-to-cart.notification"
+                template="Mooore_AddToCartNotification::hyva/notification.phtml"
+            />
+        </referenceContainer>
+    </body>
+</page>
