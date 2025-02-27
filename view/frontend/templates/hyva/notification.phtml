@@ -53,8 +53,7 @@ $notificationLifetime = $addToCartNotificationViewModel->getNotificationLifetime
 
                 setTimeout(() => {
                     self.showNotification = false;
-                    // '<?= $escaper->escapeJs($notificationLifetime) ?>'
-                }, 10000000);
+                }, <?= $escaper->escapeJs($notificationLifetime) ?>);
             })
             .catch((error) => {
                 console.error("Error:", error);
