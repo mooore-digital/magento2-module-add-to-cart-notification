@@ -7,7 +7,6 @@
             <block
                 name="mooore.add-to-cart.notification"
                 template="Mooore_AddToCartNotification::hyva/notification.phtml"
-                ifconfig="checkout/add_to_cart_notification/enabled"
             />
         </referenceContainer>
     </body>
