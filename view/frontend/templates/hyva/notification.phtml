@@ -6,7 +6,6 @@ use Hyva\Theme\Model\ViewModelRegistry;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Mooore\AddToCartNotification\ViewModel\AddToCartNotification;
-use Siteation\HyvaIconsLucide\ViewModel\LucideIcons;
 use Hyva\Theme\ViewModel\HeroiconsSolid;
 
 /**
@@ -15,11 +14,9 @@ use Hyva\Theme\ViewModel\HeroiconsSolid;
  * @var ViewModelRegistry $viewModels
  * @var AddToCartNotification $addToCartNotificationViewModel
  * @var HeroiconsSolid $icons
- * @var LucideIcons $lucideIcons
  */
 $addToCartNotificationViewModel = $viewModels->require(AddToCartNotification::class);
 $icons = $viewModels->require(HeroiconsSolid::class);
-$lucideIcons = $viewModels->require(LucideIcons::class);
 
 $notificationLifetime = $addToCartNotificationViewModel->getNotificationLifetime();
 ?>
@@ -122,14 +119,14 @@ $notificationLifetime = $addToCartNotificationViewModel->getNotificationLifetime
                         class="btn btn-primary btn-size-sm md:btn-size-base w-full"
                     >
                         <?= $escaper->escapeHtml(__('To checkout')) ?>
-                        <?= $lucideIcons->shoppingCartHtml('ml-2 hidden md:block', 24, 24, ['aria-hidden' => 'true']) ?>
+                        <?= $icons->shoppingCartHtml('ml-2 hidden md:block', 24, 24, ['aria-hidden' => 'true']) ?>
                     </a>
                 </div>
             </div>
         </template>
 
         <template x-if="productHasError">
-            <div class="text-sm font-medium text-gray-900 p-4">
+            <div class="text-sm font-medium text-error p-4">
                 <?= $escaper->escapeHtml(__('An error occurred while adding the products to the cart.')) ?>
             </div>
         </template>
