@@ -1,0 +1,134 @@
+<?php
+
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Mooore\AddToCartNotification\ViewModel\AddToCartNotification;
+use Hyva\Theme\ViewModel\HeroiconsSolid;
+
+/**
+ * @var Escaper $escaper
+ * @var Template $block
+ * @var ViewModelRegistry $viewModels
+ * @var AddToCartNotification $addToCartNotificationViewModel
+ * @var HeroiconsSolid $icons
+ */
+$addToCartNotificationViewModel = $viewModels->require(AddToCartNotification::class);
+$icons = $viewModels->require(HeroiconsSolid::class);
+
+$notificationLifetime = $addToCartNotificationViewModel->getNotificationLifetime();
+?>
+<script>
+    const initMoooreAddToCartNotification = () => ({
+        showNotification: false,
+        productHasError: false,
+        product: null,
+        showNotificationAndFillNotification(event) {
+            const productId = event.detail.productId;
+            const productQuantity = event.detail.quantity;
+            const productPrice = event.detail.price;
+
+            const self = this;
+
+            fetch(window["BASE_URL"] + "/cart_notification/data/product/product_id/" + productId, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                },
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                self.product = {
+                        quantity: productQuantity,
+                        price: productPrice,
+                        ...data
+                    };
+                self.showNotification = true;
+
+                setTimeout(() => {
+                    self.showNotification = false;
+                }, <?= $escaper->escapeJs($notificationLifetime) ?>);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                self.productHasError = true;
+                self.showNotification = true;
+            });
+        }
+    });
+</script>
+<div
+    x-data="initMoooreAddToCartNotification()"
+    class="fixed lg-max:bottom-0 left-0 md:top-14 md:left-1/2 transform md:-translate-x-1/2 z-50 md:max-w-lg w-full"
+    x-transition:enter="transition duration-300"
+    x-transition:enter-start="translate-y-full md:-translate-y-full md:top-0"
+    x-transition:enter-end="translate-y-0 md:top-14"
+    x-transition:leave="transition duration-300"
+    x-transition:leave-start="translate-y-0 md:top-14"
+    x-transition:leave-end="translate-y-full md:-translate-y-full md:top-0"
+    x-show="showNotification"
+    @product-added-to-cart.window="showNotificationAndFillNotification($event)"
+    x-cloak
+>
+    <div class="bg-white shadow-md rounded-t-lg md:rounded-b-lg border border-gray-300 overflow-hidden">
+        <template x-if="product !== null">
+            <div>
+                <div class="py-4 md:py-3 px-3 md:px-4 bg-success-lightest flex items-center gap-2">
+                    <?= $icons->badgeCheckHtml('text-success', 20, 20, ['aria-hidden' => 'true']) ?>
+                    <p class="text-sm md:text-base font-semibold">
+                        <?= $escaper->escapeHtml(__('Added To Bag')) ?>
+                    </p>
+                    <button
+                        type="button"
+                        class="ml-auto "
+                        @click="showNotification = false"
+                        aria-label="<?= $escaper->escapeHtml(__('Close')) ?>"
+                    >
+                        <?= $icons->xHtml('md:w-5 md:h-5', 16, 16, ['aria-hidden' => 'true']) ?>
+                    </button>
+                </div>
+                <div class="flex items-center border-b border-gray-300 px-3 md:px-4 py-4 md:py-6">
+                    <figure class="flex-shrink-0 p-1.5 rounded-lg border border-gray-200">
+                        <img
+                            :src="product.image"
+                            class="h-14 w-14"
+                            aria-hidden="true"
+                        />
+                    </figure>
+                    <div class="ml-4">
+                        <p class="text-sm md:text-base font-semibold" x-text="product.name"></p>
+                        <p class="text-sm">
+                            <span x-text="product.quantity"></span>x
+                            <span class="inline-block ml-4" x-html="product.price"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-center py-3 px-3 pb-5 md:px-4 gap-2 md:gap-4">
+                    <button
+                        type="button"
+                        class="btn btn-tertiary btn-size-sm md:btn-size-base w-full"
+                        @click="showNotification = false"
+                    >
+                        <?= $escaper->escapeHtml(__('Continue shopping')) ?>
+                    </button>
+                    <a
+                        :href="product.cart_url"
+                        class="btn btn-primary btn-size-sm md:btn-size-base w-full"
+                    >
+                        <?= $escaper->escapeHtml(__('To checkout')) ?>
+                        <?= $icons->shoppingCartHtml('ml-2 hidden md:block', 24, 24, ['aria-hidden' => 'true']) ?>
+                    </a>
+                </div>
+            </div>
+        </template>
+
+        <template x-if="productHasError">
+            <div class="text-sm font-medium text-error p-4">
+                <?= $escaper->escapeHtml(__('An error occurred while adding the products to the cart.')) ?>
+            </div>
+        </template>
+    </div>
+</div>
